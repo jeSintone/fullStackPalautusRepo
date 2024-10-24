@@ -1,9 +1,0 @@
-Käyttäjä kirjoittaa muistiinpanon tekstikenttään ja painaa "Save"
-
-browser ->> server: POST https://studies.cs.helsinki.fi/exampleapp/new_note
-
-Tieto tallentuu sivulle:
-
-browser ->> server: GET https://studies.cs.helsinki.fi/exampleapp/notes
-
-tämän jälkeen sivu päivittää ittensä, eli lataa uudelleen main.css, main.js ja data.json.
