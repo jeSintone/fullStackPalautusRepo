@@ -1,19 +1,14 @@
 {
   "persons": [
     {
-      "id": "2",
-      "name": "kalle kalliomäki",
-      "number": "2223333232"
+      "id": "ae6f",
+      "name": "Essi Esimerkki",
+      "number": "020202"
     },
     {
-      "id": "3",
-      "name": "Roni Rallipää",
-      "number": "0444554445"
-    },
-    {
-      "id": "368e",
-      "name": "Jesse JouJou",
-      "number": "222333"
+      "id": "356f",
+      "name": "Janne JooJoo",
+      "number": "045-772211"
     }
   ]
 }
