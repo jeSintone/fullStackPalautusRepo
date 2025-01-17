@@ -77,8 +77,8 @@ const App = () => {
       })
 
   }
-  const notesToShow = showAll ? 
-    notes : notes.filter(note => note.important)
+  const notesToShow = Array.isArray(notes) ? (showAll ? 
+    notes : notes.filter(note => note.important)) : []
 
   
   return (
