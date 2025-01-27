@@ -54,7 +54,9 @@ const App = () => {
             }, 5000)
           })
           .catch(error => {
+            if (Array.isArray(persons)) {
             setPersons(persons.filter(person => person.name !== existingPerson.name))
+            }
             setErrorMessage(`Information of ${newName} has already been removed from server`)
             setTimeout(() => {
               setErrorMessage(null)
@@ -84,7 +86,9 @@ const App = () => {
     }
   }
 
-  const numbersToShow = persons.filter(person => person.name.toLowerCase().includes(filterValue.toLowerCase()))
+  const numbersToShow = (Array.isArray(persons)) ? 
+  persons.filter(person => person.name.toLowerCase().includes(filterValue.toLowerCase()))
+  : []
 
   const deleteHandler = (id) => {
     const deletedPerson = persons.find(p => p.id === id)
