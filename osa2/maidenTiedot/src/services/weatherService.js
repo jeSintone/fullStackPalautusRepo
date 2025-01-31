@@ -1,10 +1,11 @@
-const api = {
-    key: '8820d3aafc274ef54efa9aa650bcef8f',
-    base: 'https://api.openweathermap.org/data/2.5/'
-}
+import api from "./api"
+
+const API_BASE = api[1]
+const API_KEY = api[0]
 
 const searchWeather = (countryName) => {
-    return fetch(`${api.base}weather?q=${countryName}&units=metric&APPID=${api.key}`)
+  console.log(`${API_BASE}weather?q=${countryName}&units=metric&APPID=${API_KEY}`);  
+  return fetch(`${API_BASE}weather?q=${countryName}&units=metric&APPID=${API_KEY}`)
       .then(res => res.json())
       .then((result) => {
         console.log(result)
