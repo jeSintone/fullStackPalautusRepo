@@ -66,7 +66,6 @@ const App = () => {
           setNewNumber('')
       }
     }  
-      
     else {
       const nameObject = {
       name: newName,
@@ -76,15 +75,19 @@ const App = () => {
       .create(nameObject)
       .then(returnedPerson => {
         setPersons(persons.concat(returnedPerson))
+        setPersonAddedMessage(`Added ${newName}`)
+        setTimeout(() => {
+          setPersonAddedMessage(null)
+        }, 5000)
       })
-    setPersonAddedMessage(`Added ${newName}`)
-    setTimeout(() => {
-      setPersonAddedMessage(null)
-    }, 5000)
-    setNewName('')
-    setNewNumber('')
-    }
+      .catch(error => {
+        console.log(error.response.data)
+        setErrorMessage(`Person validation failed: name: ${newName} is shorter than the minimum allowed length (3).`)
+      })
+      setNewName('')
+      setNewNumber('')
   }
+}
 
   const numbersToShow = (Array.isArray(persons)) ? 
   persons.filter(person => person.name.toLowerCase().includes(filterValue.toLowerCase()))
