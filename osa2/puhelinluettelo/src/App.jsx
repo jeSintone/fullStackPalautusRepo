@@ -53,7 +53,7 @@ const App = () => {
               setPersonAddedMessage(null)
             }, 5000)
           })
-          .catch(error => {
+          .catch(() => {
             if (Array.isArray(persons)) {
             setPersons(persons.filter(person => person.name !== existingPerson.name))
             }
@@ -104,7 +104,7 @@ const App = () => {
         .then(() => {
           setPersons(persons.filter(person => person.id !== id))
         })
-        .catch(error => {
+        .catch(() => {
           setErrorMessage(`Information of ${deletedPerson.name} has already been removed from server`)
           setTimeout(() => {
             setErrorMessage(null)
