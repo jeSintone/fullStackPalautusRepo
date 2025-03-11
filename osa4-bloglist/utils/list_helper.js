@@ -4,7 +4,7 @@ const dummy = (blogs) => {
 const totalLikes = (blogs) => {
     return (blogs.reduce((sum, blog) => sum + blog.likes,0))
 }
-const favoriteBlog = (blogs => {
+const favoriteBlog = (blogs) => {
     let favBlog = {
         title: 'placeHolderTitle',
         author: 'placeHolderAUthor',
@@ -20,9 +20,70 @@ const favoriteBlog = (blogs => {
     } else {
         return null
     }
-})
+}
+
+const mostBlogs = (blogs) => {
+	
+	if (blogs.length === 0) {
+		return null
+	} else {
+
+	let authorMap = new Map() 
+	for (let blog of blogs) {
+		if (authorMap.has(blog.author)) {
+			authorMap.set(blog.author, authorMap.get(blog.author) + 1)
+		} else {
+			authorMap.set(blog.author, 1)
+		}
+	}
+	let mostBlogs = 0
+	let authorWithMostBlogs = ""
+	for (let author of authorMap.keys()) {
+
+		if (authorMap.get(author) > mostBlogs) {
+			authorWithMostBlogs = author
+			mostBlogs = authorMap.get(author)
+		}
+	}
+	return {
+		author: authorWithMostBlogs,
+		blogs: mostBlogs
+	}
+}
+}
+const mostLikes = (blogs) => {
+	if (blogs.length === 0) {
+		return null
+	} 
+	let authorMap = new Map() 
+	for (let blog of blogs) {
+		if (authorMap.has(blog.author)) {
+			authorMap.set(blog.author, authorMap.get(blog.author) + blog.likes)
+		} else {
+			authorMap.set(blog.author, blog.likes)
+		}
+	}
+	console.log('test')
+	console.log(authorMap)
+	let mostLikes = 0
+	let authorWithMostLikes = ""
+	for (let author of authorMap.keys()) {
+
+		if (authorMap.get(author) > mostLikes) {
+			authorWithMostLikes = author
+			mostLikes = authorMap.get(author)
+		}
+	}
+	return {
+		author: authorWithMostLikes,
+		likes: mostLikes
+	}
+
+}
 module.exports = {
     dummy,
     totalLikes,
-    favoriteBlog
+    favoriteBlog,
+	mostBlogs,
+	mostLikes
 }
