@@ -41,7 +41,7 @@ test('a valid blog can be added', async () => {
 		title: "testi4.10tehtava",
 		author: "TestaajaTessi",
 		url: "www.supertesti.org",
-		likes: 52,
+		likes: 54
 	}
 	await api
 		.post('/api/blogs')
@@ -50,9 +50,25 @@ test('a valid blog can be added', async () => {
 		.expect('Content-Type', /application\/json/)
 	const response = await api.get('/api/blogs')
 
-	const contents = response.body.map(res => res.title)
+	const titles = response.body.map(res => res.title)
 	assert.strictEqual(response.body.length, helper.initialBlogs.length + 1)
-	assert(contents.includes('testi4.10tehtava'))
+	assert(titles.includes('testi4.10tehtava'))
+})
+test('if no likes given, default set to 0', async () => {
+	const newBlog = {
+		title: "testi4.11tehtava",
+		author: "tälle blogille ei asetettu likejä",
+		url: "www.testitesti.org"
+	}
+	await api
+		.post('/api/blogs')
+		.send(newBlog)
+		.expect(201)
+		.expect('Content-Type', /application\/json/)
+	const response = await api.get('/api/blogs')
+
+	const addedBlog = response.body.find(blog => blog.title === "testi4.11tehtava")
+	assert.strictEqual(addedBlog.likes, 0)
 })
 
 after(async () => {
