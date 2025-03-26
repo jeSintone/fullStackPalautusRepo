@@ -81,10 +81,27 @@ const mostLikes = (blogs) => {
 
 }
 
+const initialBlogs = [
+	{
+		"title": "jessen blogi",
+		"author": "Jesse",
+		"url": "www.jessenblogimuka.com",
+		"likes": 5,
+	  },
+	  {
+		"title": "Testi numero dos",
+		"author": "Jesse",
+		"url": "www.jokutesti.com",
+		"likes": 54,
+	  }
+]
+
+
 module.exports = {
     dummy,
     totalLikes,
     favoriteBlog,
 	mostBlogs,
-	mostLikes
+	mostLikes,
+	initialBlogs,
 }
