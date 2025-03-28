@@ -71,6 +71,32 @@ test('if no likes given, default set to 0', async () => {
 	assert.strictEqual(addedBlog.likes, 0)
 })
 
+test('blog is properly deleted', async () => {
+	const newBlog = {
+		title: "poistettava blogi",
+		author: "tämä blogi kuuluu poistaa",
+		url: "www.testitesti.org",
+		likes: 404,
+	}
+
+	const postResponse = await api
+		.post('/api/blogs')
+		.send(newBlog)
+		.expect(201)
+		.expect('Content-Type', /application\/json/)
+
+	const blogId = postResponse.body.id
+	
+	await api
+		.delete(`/api/blogs${blogId}`)
+		.expect(204)
+	
+	const getResponse = await api.get('/api/blogs')
+	const blogTitles = getResponse.body.map(blog => blog.title)
+	assert.strictEqual(blogTitles.includes(newBlog.title), false)
+
+})
+
 after(async () => {
   await mongoose.connection.close()
 })
